@@ -1,7 +1,5 @@
-import com.sun.jdi.Value;
 
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -44,5 +42,15 @@ public class Main {
                 }
             }
         }
+        // First solution
+        p_b.entrySet().stream()
+                .sorted(Map.Entry.<String, String>comparingByValue())
+                .forEach(System.out::println);
+
+        // Second solution
+//        ArrayList<String> p_b_keys = new ArrayList<>(p_b.keySet());
+//        ArrayList<String> p_b_values = new ArrayList<>(p_b.values());
+//        List<List> p_b_list = new ArrayList<>();
+
     }
 }
