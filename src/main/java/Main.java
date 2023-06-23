@@ -34,23 +34,36 @@ public class Main {
             } else {
                 p_b.put(name, " " + phone_num);
             }
+        }
+        // First solution
+//        p_b.entrySet().stream()
+//                .sorted(Map.Entry.<String, String>comparingByValue())
+//                .forEach(System.out::println);
 
+        // Second solution
+        ArrayList<String> p_b_keys = new ArrayList<>(p_b.keySet());
+        p_b_keys.sort(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                String[] splitted_o1 = p_b.get(o1).split(",");
+                String[] splitted_o2 = p_b.get(o2).split(",");
+                int o1_counter = splitted_o1.length;
+                int o2_counter = splitted_o2.length;
+                if (o1_counter > o2_counter) {
+                    return o2_counter - o1_counter;
+                } else {
+                    return 0;
+                }
+            }
+        });
+
+        for (int i = 0; i < p_b_size; i++) {
             if (i == p_b_size - 1) {
                 for (String key :
-                        p_b.keySet()) {
+                        p_b_keys) {
                     System.out.println(key + ": " + p_b.get(key));
                 }
             }
         }
-        // First solution
-        p_b.entrySet().stream()
-                .sorted(Map.Entry.<String, String>comparingByValue())
-                .forEach(System.out::println);
-
-        // Second solution
-//        ArrayList<String> p_b_keys = new ArrayList<>(p_b.keySet());
-//        ArrayList<String> p_b_values = new ArrayList<>(p_b.values());
-//        List<List> p_b_list = new ArrayList<>();
-
     }
 }
